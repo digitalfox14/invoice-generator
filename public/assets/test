@@ -1,0 +1,180 @@
+<?php 
+    
+$subtotal = 0;
+$item_cost = 0;
+$total = 0;
+$discount = $invoice->discounts ?? 0;
+$tax = $invoice->tax ?? 0;
+$shipping = $invoice->shipping ?? 0;
+    
+    foreach ($items as $item)   {
+    $item->quantity;
+    $item->unit_cost;
+    $item_cost = $item->quantity * $item->unit_cost;
+ $subtotal = $subtotal + $item_cost;
+}
+$total = $subtotal;
+if (($invoice->discounts ?? '') || ($invoice->tax ?? '') || ($invoice->shipping ?? '')) {
+    $total = $subtotal - $discount + $tax + $shipping;
+}
+
+?>
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <style>
+            table tr td {
+                text-align: right;
+                width: 25%;
+                padding: 0px 20px;
+            }
+
+            table tr td:first-child {
+                text-align: left;
+                
+            }
+            .color-gray{    
+                background-color:lightgrey;
+            }
+            .w-15 {
+                width:15%;
+            }
+            .margin-20{
+                margin-right:20px;
+            }
+        </style>
+
+    </head>
+    <body>
+        
+        <div>
+        
+        <table class="offset-6" style="width:50%;">
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="text-black-50" style="text-align: right; width:25%; font-size: xxx-large;"><span class="margin-20">INVOICE</span></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="text-black-50"><span class="margin-20">{{$invoice->number}}</span></td>
+            </tr>
+        </table>
+    
+    </div>
+    <!-- datails -->
+    <table class="mt-5" style="width:100%;">
+        <tr>
+            <td></td>
+            <td></td>
+            <td class="text-black-50">{{$invoice->date_title}}:</td>
+            <td><span class="margin-20">{{$invoice->date}}</span></td>
+        </tr>
+        <tr>
+            <td><span style="margin-left:35px;"><b>{{$invoice->from}}</b></span></td>
+            <td></td>
+            <td class="text-black-50">{{$invoice->payment_terms_title}}:</td>
+            <td><span class="margin-20">{{$invoice->payment_terms}}</span></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td class="text-black-50">{{$invoice->due_date_title}}:</td>
+            <td><span class="margin-20">{{$invoice->due_date}}</span></td>
+        </tr>
+        <tr>
+            <td class="text-black-50"><span style="margin-left:35px;">{{$invoice->to_title}}:</span></td>
+            <td></td>
+            <td class="text-black-50">{{$invoice->po_number_title}}:</td>
+            <td><span class="margin-20">{{$invoice->po_number}}</span></td>
+        </tr>
+        <tr>
+            <td><span style="margin-left:35px;"><b>{{$invoice->to}}</b></span></td>
+            <td></td>
+            <td class="color-gray"><b>{{$invoice->total_title}}:</b></td>
+            <td class="color-gray"><span class="margin-20"><b>&#8377;{{$balanceDue = $total-$invoice->amount_paid}}</b></span></td>
+        </tr>
+    </table>
+    <!-- item count -->
+    <table class="mt-5" style="width:100%;">
+        <tr class="text-light" style="background-color:#494747;">
+            <td  style="width:55%;"><span style="margin-left:20px;">Item</span></td>
+            <td class="w-15">Quantity</td>
+            <td class="w-15">Rate</td>
+            <td class="w-15"><span class="margin-20">Amount</span></td>
+        </tr>
+        @foreach ($items as $item)      
+        <tr>
+            <td style="text-align: left; width:55%;"><span style="margin-left:20px;">{{$item->name}}</span></td>
+            <td class="w-15">{{$item->quantity}}</td>
+            <td class="w-15">&#8377;{{$item->unit_cost}}</td>
+            <td class="w-15"><span class="margin-20">&#8377;{{$item_cost = $item->quantity * $item->unit_cost}}</span></td>
+        </tr>
+        @endforeach
+    </table>
+    <!-- total -->
+    <table class="mt-5" style="width:100%;">
+        <tr>
+            <td></td>
+            <td></td>
+            <td class="text-black-50">{{$invoice->subtotal_title}}:</td>
+            <td><span class="margin-20">&#8377;{{$subtotal}}</span></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td class="text-black-50">{{$invoice->discount_title ?? 'Discount'}}:</td>
+            <td><span class="margin-20">&#8377;{{$invoice->discounts??'0.00'}}</span></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td class="text-black-50">{{$invoice->tax_title ?? 'Tax'}}:</td>
+            <td><span class="margin-20">&#8377;{{$invoice->tax??'0.00'}}</span></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td class="text-black-50">{{$invoice->shipping_title ?? 'Shipping'}}:</td>
+            <td><span class="margin-20">&#8377;{{$invoice->shipping??'0.00'}}</span></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td class="text-black-50">Total:</td>
+            <td><span class="margin-20">&#8377;{{$total}}</span></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td class="text-black-50">{{$invoice->amount_paid_title}}:</td>
+            <td><span class="margin-20">&#8377;{{$invoice->amount_paid}}</span></td>
+        </tr>
+    </table>
+    <table class="mt-5" style="margin-left:35px;">
+        <tr>
+            <td>{{$invoice->notes_title}}:</td>
+        </tr>
+        <tr>
+            <td>{{$invoice->notes}}</td>
+        </tr>
+    </table>
+    <table class="mt-5" style="margin-left:35px;" >
+    
+        <tr>
+            <td>{{$invoice->terms_title}}:</td>
+        </tr>
+        <tr>
+            <td>{{$invoice->terms}}</td>
+        </tr>
+    </table>
+    </body>
+</html>
