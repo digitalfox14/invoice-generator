@@ -45,16 +45,16 @@ if (($invoice->discounts ?? '') || ($invoice->tax ?? '') || ($invoice->shipping 
     .bg-color-gray{
         background-color: gray;
     }
-    .collapse {
+    .collapse{
         border-collapse: collapse;
     }
-
+    
     table {
         width: 100%;
         margin-bottom: 20px;
         
     }
-
+    
     table tr td {
         width: 25%;
     }
@@ -62,15 +62,15 @@ if (($invoice->discounts ?? '') || ($invoice->tax ?? '') || ($invoice->shipping 
     table tr td:first-child {
         width:  50%;
     }
-
+    
     td.w-50 {
         width: 50%;
     }
     
-    </style>
+</style>
 </head>
-    <body>
-
+<body>
+    
     <table>
         <tr>
             <td></td>
@@ -94,8 +94,8 @@ if (($invoice->discounts ?? '') || ($invoice->tax ?? '') || ($invoice->shipping 
             <td></td>
         </tr>
     </table>
-
-        <table>
+    
+    <table>
         <tr>
             <td>
                 {{$invoice->to_title}}
@@ -103,7 +103,7 @@ if (($invoice->discounts ?? '') || ($invoice->tax ?? '') || ($invoice->shipping 
                 {{$invoice->to}}
             </td>
             <td class="w-50">
-                <table style="table-layout:fixed;" width="100%">
+                <table class="collapse" style="table-layout:fixed;" width="100%">
                     <tr class="text-right">
                         <td class="w-50">{{$invoice->date_title}}:</td>
                         <td class="w-50">{{$invoice->date}}</td>
@@ -120,9 +120,9 @@ if (($invoice->discounts ?? '') || ($invoice->tax ?? '') || ($invoice->shipping 
                         <td >{{$invoice->po_number_title}}:</td>
                         <td>{{$invoice->po_number}}</td>
                     </tr>
-                    <tr class="text-right">
-                        <td>{{$invoice->total_title}}:</td>
-                        <td>${{$balanceDue = $total-$invoice->amount_paid}}</td>
+                    <tr class="text-right bg-color-gray">
+                        <td><b>{{$invoice->total_title}}:</b></td>
+                        <td><b>${{$balanceDue = $total-$invoice->amount_paid}}</b></td>
                     </tr>  
                 </table>
             </td>
@@ -136,7 +136,7 @@ if (($invoice->discounts ?? '') || ($invoice->tax ?? '') || ($invoice->shipping 
     <table class="collapse">
         <tr class="bg-color">
             <td>Item</td>
-            <td class="text-right w-15">Quantity</td>
+            <td class="text-right">Quantity</td>
             <td class="text-right">Rate</td>
             <td class="text-right">Amount</td>
         </tr>
@@ -148,9 +148,9 @@ if (($invoice->discounts ?? '') || ($invoice->tax ?? '') || ($invoice->shipping 
             <td class=" text-right">${{$item_cost = $item->quantity * $item->unit_cost}}</td>
         </tr>
         @endforeach
-    
+        
     </table>
-
+    
     <table>
         <tr>
             <td> 
@@ -196,7 +196,7 @@ if (($invoice->discounts ?? '') || ($invoice->tax ?? '') || ($invoice->shipping 
             <td>{{$invoice->notes}}</td>
         </tr>
     </table>
-
+    
     <table>
         <tr>
             <td>{{$invoice->terms_title}}:</td>
@@ -205,5 +205,6 @@ if (($invoice->discounts ?? '') || ($invoice->tax ?? '') || ($invoice->shipping 
             <td>{{$invoice->terms}}</td>
         </tr>
     </table>
-    </body>
+</body>
 </html>
+
