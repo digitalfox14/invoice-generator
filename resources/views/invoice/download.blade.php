@@ -26,14 +26,8 @@ if (($invoice->discounts ?? '') || ($invoice->tax ?? '') || ($invoice->shipping 
     <meta charset="utf-8">
     <title></title>
     <style>
-    .row {
-        width: 100%;
-    }
     
-    .col-sm-3 {
-        width: 25%;
-        float: left;
-    }
+    
     .font-size-50{
         font-size: 50px;
     }
@@ -41,136 +35,160 @@ if (($invoice->discounts ?? '') || ($invoice->tax ?? '') || ($invoice->shipping 
         text-align: right;
     }
     .word-break{
+        width: 100%;
         word-break: break-all;
     }
     .bg-color{
         background-color: black;
         color: white;
     }
-    .mp{
-        margin: inherit;
-        padding: inherit;   
-    }
-    .font-family{
-    font-family: inherit;
+    .bg-color-gray{
+        background-color: gray;
     }
     .collapse {
         border-collapse: collapse;
-        border-radius: 1em;
+    }
+
+    table {
+        width: 100%;
+        margin-bottom: 20px;
+        
+    }
+
+    table tr td {
+        width: 25%;
+    }
+    
+    table tr td:first-child {
+        width:  50%;
+    }
+
+    td.w-50 {
+        width: 50%;
     }
     
     </style>
 </head>
     <body>
-        
-        
-    <table  width = "100%">
+
+    <table>
         <tr>
-            <td width="50%">
+            <td></td>
+            <td></td>
+            <td class="text-right" >
+                <span class="font-size-50">INVOICE</span>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td class="text-right" >
+                <span>{{$invoice->number}}</span>
+            </td>
+        </tr>
+        <tr>
+            <td>
                 {{$invoice->from}}
             </td>
-            
-            <td width="25%">
-            </td>
-            <td width="25%" class="text-right">
-                <table width="100%">
-                    <tr class="text-right font-family">
-                        <td>
-                            <span class="font-size-50 ">INVOICE</span>
-                        </td>
-                        <tr class="text-right">
-                            <td>
-                                <span>{{$invoice->number}}</span>
-                            </td>
-                        </tr>
-                    </tr>
-                </table>
-            </td>
+            <td></td>
+            <td></td>
         </tr>
     </table>
 
-    <table width = "100%">
+        <table>
         <tr>
-            <td width="50%">
-                <table  width = "100%">
-                    <tr><td>{{$invoice->to_title}}</td></tr>
-                    <tr><td>{{$invoice->to}}</td></tr>
-                </table>
+            <td>
+                {{$invoice->to_title}}
+                <br />
+                {{$invoice->to}}
             </td>
-            
-            <td width="25%">
-                <table width = "100%">
-                    <tr class="text-right"><td >{{$invoice->date_title}}:</td></tr>  
-                    <tr class="text-right"><td >{{$invoice->payment_terms_title}}:</td></tr>  
-                    <tr class="text-right"><td >{{$invoice->due_date_title}}:</td></tr>  
-                    <tr class="text-right"><td >{{$invoice->po_number_title}}:</td></tr>  
-                    <tr class="text-right"><td ><b>{{$invoice->total_title}}:</b></td></tr>  
-                    
-                </table>
-            </td>
-            <td width="25%">
-                <table width = "100%">
-                    <tr class="text-right"><td>{{$invoice->date}}</td></tr>
-                    <tr class="text-right word-break"><td >{{$invoice->payment_terms}}</td></tr>
-                    <tr class="text-right"><td>{{$invoice->due_date}}</td></tr>
-                    <tr class="text-right word-break"><td>{{$invoice->po_number}}</td></tr>
-                    <tr class="text-right"><td><b>${{$balanceDue = $total-$invoice->amount_paid}}</b></td></tr>
+            <td class="w-50">
+                <table style="table-layout:fixed;" width="100%">
+                    <tr class="text-right">
+                        <td class="w-50">{{$invoice->date_title}}:</td>
+                        <td class="w-50">{{$invoice->date}}</td>
+                    </tr>  
+                    <tr class="text-right">
+                        <td>{{$invoice->payment_terms_title}}:</td>
+                        <td>{{$invoice->payment_terms}}</td>
+                    </tr>  
+                    <tr class="text-right">
+                        <td >{{$invoice->due_date_title}}:</td>
+                        <td>{{$invoice->due_date}}</td>
+                    </tr>  
+                    <tr class="text-right">
+                        <td >{{$invoice->po_number_title}}:</td>
+                        <td>{{$invoice->po_number}}</td>
+                    </tr>
+                    <tr class="text-right">
+                        <td>{{$invoice->total_title}}:</td>
+                        <td>${{$balanceDue = $total-$invoice->amount_paid}}</td>
+                    </tr>  
                 </table>
             </td>
         </tr>
     </table>
-
-    <table width="100%" class="mp collapse">
+    
+    
+    
+    
+    
+    <table class="collapse">
         <tr class="bg-color">
-            <td width="55%">Item</td>
-            <td width="15%" class="text-right">Quantity</td>
-            <td width="15%" class="text-right">Rate</td>
-            <td width="15%" class="text-right">Amount</td>
+            <td>Item</td>
+            <td class="text-right w-15">Quantity</td>
+            <td class="text-right">Rate</td>
+            <td class="text-right">Amount</td>
         </tr>
         @foreach ($invoice->items as $item)
-        <tr class="mp">
-            <td width="55%">{{$item->name}}</td>
-            <td width="15%" class="text-right">{{$item->quantity}}</td>
-            <td width="15%" class="text-right">${{$item->unit_cost}}</td>
-            <td width="15%" class="text-right">${{$item_cost = $item->quantity * $item->unit_cost}} </td>
+        <tr>
+            <td>{{$item->name}}</td>
+            <td class="  text-right">{{$item->quantity}}</td>
+            <td class=" text-right">${{$item->unit_cost}}</td>
+            <td class=" text-right">${{$item_cost = $item->quantity * $item->unit_cost}}</td>
         </tr>
         @endforeach
+    
     </table>
 
-
-    <table width = "100%">
+    <table>
         <tr>
-            <td width="25%">
-                
+            <td> 
             </td>
-            <td width="25%">
-                
-            </td>
-            <td width="25%">
-                <table width = "100%">
-                    <tr class="text-right"><td >{{$invoice->subtotal_title}}:</td></tr>  
-                    <tr class="text-right"><td >{{$invoice->discount_title ?? 'Discount'}}:</td></tr>  
-                    <tr class="text-right"><td >{{$invoice->tax_title ?? 'Tax'}}:</td></tr>  
-                    <tr class="text-right"><td >{{$invoice->shipping_title ?? 'Shipping'}}:</td></tr>  
-                    <tr class="text-right"><td >Total:</td></tr>  
-                    <tr class="text-right"><td >{{$invoice->amount_paid_title}}:</td></tr>  
+            <td class="w-50">
+                <table style="table-layout:fixed;" width="100%">
+                    <tr class="text-right">
+                        <td class="w-50" >{{$invoice->subtotal_title}}:</td> 
+                        <td class="w-50">${{$subtotal}}</td> 
+                    </tr>
+                    <tr class="text-right">
+                        <td >{{$invoice->discount_title ?? 'Discount'}}:</td>
+                        <td>${{$invoice->discounts??'0.00'}}</td>  
+                    </tr>
+                    <tr class="text-right">
+                        <td >{{$invoice->tax_title ?? 'Tax'}}:</td>
+                        <td>${{$invoice->tax??'0.00'}}</td>  
+                    </tr>
+                    <tr class="text-right">
+                        <td >{{$invoice->shipping_title ?? 'Shipping'}}:</td>
+                        <td>${{$invoice->shipping??'0.00'}}</td>  
+                    </tr>
+                    <tr class="text-right">
+                        <td >Total:</td> 
+                        <td>${{$total}}</td> 
+                    </tr>
+                    <tr class="text-right">
+                        <td >{{$invoice->amount_paid_title}}:</td>
+                        <td>${{$invoice->amount_paid}}</td>  
+                    </tr>
                     
                 </table>
             </td>
-            <td width="25%">
-                <table width = "100%">
-                    <tr class="text-right"><td>${{$subtotal}}</td></tr>
-                    <tr class="text-right word-break"><td >${{$invoice->discounts??'0.00'}}</td></tr>
-                    <tr class="text-right"><td>${{$invoice->tax??'0.00'}}</td></tr>
-                    <tr class="text-right word-break"><td>${{$invoice->shipping??'0.00'}}</td></tr>
-                    <tr class="text-right"><td>${{$total}}</td></tr>
-                    <tr class="text-right"><td>${{$invoice->amount_paid}}</td></tr>
-                </table>
-            </td>
         </tr>
     </table>
-
-    <table width="100%">
+    
+    
+    <table width="720px">
         <tr>
             <td>{{$invoice->notes_title}}:</td>
         </tr>

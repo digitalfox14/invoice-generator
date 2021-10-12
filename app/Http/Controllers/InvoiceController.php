@@ -17,11 +17,11 @@ class InvoiceController extends Controller
     public function index($id)
     {
         $invoice = Invoice::find($id);
-        $invoice->invoice = json_decode($invoice->invoice);
+        $invoice= json_decode($invoice->invoice);
         
-        $pdf = PDF::loadView('invoice.download',['invoice' => $invoice->invoice]);
+        $pdf = PDF::loadView('invoice.download',['invoice' => $invoice]);
         return $pdf->stream('invoice.pdf');
-        return view('invoice.download',['invoice' => $invoice->invoice]);
+        return view('invoice.download',['invoice' => $invoice]);
     }
 
     /**
@@ -42,7 +42,7 @@ class InvoiceController extends Controller
      */
     public function store(Request $request)
     {
-        
+        //echo "<pre>"; print_r($request->all()); die;
         $encodeInvoive = json_encode($request->all());
         $authId = Auth::id();
         $ipAddress = $request->ip();
