@@ -9,10 +9,10 @@ var amountPaid
 $(document).ready(function(){
     
     $('.dropify').dropify(); 
-
+    
     $('#line-item').on('click',function(){
         var index = $('.items-table .item-row').length;
-
+        
         $('.items-table').append(`<div class="item-row">
             <div class="main-row">
                 <div class="delete"><button type="button"  class="btn btn-link deleteItem"><strong>X</strong></button></div>
@@ -180,17 +180,15 @@ $(document).ready(function(){
     });
     
     $('#downloadInvoice').click(function(){
-        
-        
-        $data = $('#invoiceForm').serialize();
+        data = $('#invoiceForm').serialize();
+        console.log(data);
         $.ajax({
             type : 'POST',
             url : '/form',
-            data : $data
+            data : data
         });
     });
     
-
     
 });
 function calculateInvoice() {
@@ -233,6 +231,6 @@ function calculateInvoice() {
             document.getElementById('balanceDue').innerHTML = balanceDue;
         }
         
-    
+            
 }
 

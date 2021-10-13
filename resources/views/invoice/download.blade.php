@@ -27,6 +27,9 @@ if (($invoice->discounts ?? '') || ($invoice->tax ?? '') || ($invoice->shipping 
     <title></title>
     <style>
     
+    .mr-20{
+        margin-right: 20px;
+    }
     
     .font-size-50{
         font-size: 50px;
@@ -52,11 +55,12 @@ if (($invoice->discounts ?? '') || ($invoice->tax ?? '') || ($invoice->shipping 
     table {
         width: 100%;
         margin-bottom: 20px;
-        
+        font-family: 'sans-serif';
     }
     
     table tr td {
         width: 25%;
+        padding: 5px;
     }
     
     table tr td:first-child {
@@ -67,25 +71,24 @@ if (($invoice->discounts ?? '') || ($invoice->tax ?? '') || ($invoice->shipping 
         width: 50%;
     }
     
+    .logo{
+        display:none;
+    }
+    
 </style>
 </head>
 <body>
     
     <table>
         <tr>
-            <td></td>
-            <td></td>
-            <td class="text-right" >
-                <span class="font-size-50">INVOICE</span>
-            </td>
-        </tr>
-        <tr>
-            <td></td>
+            <td> <img src="{{asset('assets/images/img_car.jpg')}}" height="130px" width="200px" alt=""> </td>    
             <td></td>
             <td class="text-right" >
+                <span class="font-size-50">INVOICE</span><br/>
                 <span>{{$invoice->number}}</span>
             </td>
         </tr>
+        
         <tr>
             <td>
                 {{$invoice->from}}

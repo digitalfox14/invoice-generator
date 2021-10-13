@@ -3,11 +3,11 @@
 @extends ('layouts.navbar')
 @section ('content')
 <div class="papers" style="margin-top:20;">
-    <form id="invoiceForm" name="invoiceForm">
-        @csrf
         <div class="invoice">
             <div class="two-col clearfix">
                 <div class="title">
+                    <form id="invoiceForm" name="invoiceForm" enctype="multipart/form-data">
+                    @csrf
                     <input type="text" class="form-control input-label" name="header" value="INVOICE" />
                     <div class="subtitle">
                         <div class="input-group">
@@ -19,9 +19,8 @@
                 
                 <div class="col">
                     <div class="col-sm-7">
-                        <input type="file" id="input-file-now" name="logo" class="dropify"  />
+                            <input type="file" id="input-file-now" name="logo" class="dropify"  data-height="110" data-default-file="url_of_your_file">
                     </div>
-                    
                     <div class="contact from">
                         <div class="field">
                             <input type="text" class="input-label form-control" name="from_title" value="From" />

@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use  App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\LogoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,3 +24,5 @@ Auth::routes();
 Route::post('/form',[InvoiceController::class, 'store'])->name('invoice.store');
 Route::get('/download/{id}/pdf',[InvoiceController::class, 'index'])->name('invoice.index');
 Route::get('/invoice/1/download',[InvoiceController::class, 'show'])->name('invoice.show');
+
+Route::post('/img',[InvoiceController::class, 'img'])->name('invoice.img');

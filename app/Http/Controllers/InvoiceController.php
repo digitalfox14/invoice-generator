@@ -6,6 +6,7 @@ use App\Models\Invoice;
 use Illuminate\Http\Request;
 use Auth;
 use PDF;
+use Illuminate\Support\Facades\Storage;
 
 class InvoiceController extends Controller
 {
@@ -42,7 +43,8 @@ class InvoiceController extends Controller
      */
     public function store(Request $request)
     {
-        //echo "<pre>"; print_r($request->all()); die;
+        
+        echo "<pre>"; print_r($request->all()); die;
         $encodeInvoive = json_encode($request->all());
         $authId = Auth::id();
         $ipAddress = $request->ip();
@@ -96,5 +98,54 @@ class InvoiceController extends Controller
     public function destroy(Invoice $invoice)
     {
         //
+    }
+    public function img(Request $request)
+    {
+        
+        echo "<pre>"; print_r($request->all()); die;
+        $path = $request->file('file')->store('public/img');
+        // $fileOriginalName = $request->file->getClientOriginalName();
+        // echo "<pre>"; print_r($fileOriginalName); die;
+        // $fileextension = pathinfo($fileOriginalName);
+        // $fileExt = $fileextension['extension'];
+        // $file = new FileManager;
+        // $fileOriginalName = $request->file->getClientOriginalName();    
+        // $path = $request->file('file')->store('files');
+        // $path_url = url('storage/'.$path);
+        // $file->user_id = Auth::id();
+        // $file->file_name = $fileOriginalName;
+        // $file->file_ext = $fileExt;
+        // $file->file_path = $path_url;
+        
+        // return Storage::putFile(
+        //       storage_path(asset('assets/imgages')),
+        //       request()->file('file')
+        //   );
+        //   echo "<pre>"; print_r($path); die;
+          // $path = Storage::putFile(asset('assets/imgages'), $request->file);
+        // $fileOriginalName = $request->file->getClientOriginalName();
+        // $fileextension = pathinfo($fileOriginalName);
+        // $fileExt = $fileextension['extension'];
+        // 
+        // $file = new FileManager;
+        // $fileOriginalName = $request->file->getClientOriginalName();    
+        // $path = $request->file('file')->store('files');
+        // $path_url = url('storage/'.$path);
+        // $file->user_id = Auth::id();
+        // $file->file_name = $fileOriginalName;
+        // $file->file_ext = $fileExt;
+        // $file->file_path = $path_url;
+        
+        
+        //$fileName = time().'_'.$req->file->getClientOriginalName();
+        //$path = Storage::putFile('img', $request->file();
+        //$name = $request->file();
+        //echo "<pre>"; print_r($fileName); die;
+        // Storage::put('file.jpg', $contents);
+        // $path = Storage::putFile('$contents', new File('/img'));
+            //$path = $request->file('$contents')->store('assets/img');
+
+        //return $path;
+        
     }
 }
