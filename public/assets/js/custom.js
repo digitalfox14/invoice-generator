@@ -8,7 +8,7 @@ var amountPaid
 
 $(document).ready(function(){
     
-    $('.dropify').dropify(); 
+    
     
     $('#line-item').on('click',function(){
         var index = $('.items-table .item-row').length;
@@ -17,11 +17,11 @@ $(document).ready(function(){
             <div class="main-row">
                 <div class="delete"><button type="button"  class="btn btn-link deleteItem"><strong>X</strong></button></div>
                 <div class="amount value">
-                    <span>&#8377;</span><span class="currency-symbol total-items"></span>    
+                    <span>$</span><span class="currency-symbol total-items"></span>    
                 </div>
                 <div class="unit_cost">
                     <div class="input-group">
-                        <span class="input-group-addon currency-sign">&#8377;</span>
+                        <span class="input-group-addon currency-sign">$</span>
                         <input class="item-calc form-control item-amount" type="number" step="any" autocomplete="off" name="items[${index}][unit_cost]" value="0" />
                     </div>
                 </div>
@@ -95,7 +95,7 @@ $(document).ready(function(){
                 <input class="input-label form-control" type="text" name="shipping_title" value="Shipping" />
                 <div class="input-group-addon">
                     <div class="input-group">
-                        <span class="input-group-addon currency-sign">&#8377;</span>
+                        <span class="input-group-addon currency-sign">$</span>
                         <input type="number" class="form-control" id="shippingInput" name="shipping"  />
                         <button type="button" id="shippingClose" class="btn btn-link btn-close"><strong>X</strong></button>
                     </div>
@@ -180,20 +180,43 @@ $(document).ready(function(){
     });
     
     $('#downloadInvoice').click(function(){
-        data = $('#invoiceForm').serialize();
-        console.log(data);
+        //data = $('#invoiceForm').serialize();
+        let myForm = document.getElementById('invoiceForm');
+        let formData = new FormData(myForm);
+        
+        
         $.ajax({
             type : 'POST',
             url : '/form',
-            data : data
+            data : formData,
+            enctype: 'multipart/form-data',
+            processData: false,
+            contentType: false
         });
     });
+    
+    // $('#input-file-now').change(function(){
+    //     let myForm = document.getElementById('invoiceForm');
+    //     let formData = new FormData(myForm);
+    // 
+    //     $.ajax({
+    //         type : 'POST',
+    //         url : '/img',
+    //         data : formData,
+    //         enctype: 'multipart/form-data',
+    //         processData: false,
+    //         contentType: false
+    //     });
+    //});
+    
+    $("#input-file-now").dropzone({
+         url: "/img" 
+     });
+
     
     
 });
 function calculateInvoice() {
-    // ItemsTotal
-    // 1 total cost items quantity and price 
     
         values = [];
         $( ".total-items" ).each(function( index,value ) {
@@ -208,13 +231,13 @@ function calculateInvoice() {
         document.getElementById('total').innerHTML = total;
         document.getElementById('balanceDue').innerHTML = total;
         
-        // less discount on  totalAmount
+    
         if (discountInput != null) {
             total = total - discountInput;
             document.getElementById('total').innerHTML = total;
             document.getElementById('balanceDue').innerHTML = total;
                     
-            // Add Tax and Shipping
+    
         }
         if (taxInput != null) {
             total = total + taxInput;
@@ -230,6 +253,8 @@ function calculateInvoice() {
             balanceDue = total - amountPaid;
             document.getElementById('balanceDue').innerHTML = balanceDue;
         }
+        
+        
         
             
 }

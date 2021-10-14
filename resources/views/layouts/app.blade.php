@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="{{asset('assets/css/demo.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/dropify.min.css')}}">
+    <link href="{{asset('assets/css/dropzone.min.css')}}" type="text/css" rel="stylesheet" />
 </head>
 <body>
     <div class="scrollable">
@@ -29,6 +30,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.0-rc.2/jquery-ui.min.js" integrity="sha256-RQLbEU539dpygNMsBGZlplus6CkitaLy0btTCHcULpI=" crossorigin="anonymous"></script> 
     <script src="{{asset('assets/js/dropify.min.js')}}"></script>
+    <script src="{{asset('assets/js/dropzone.min.js')}}"></script>
     <script src="{{asset('assets/js/custom.js')}}"></script>
 </body>
 </html>

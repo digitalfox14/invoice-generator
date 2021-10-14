@@ -6,7 +6,7 @@
         <div class="invoice">
             <div class="two-col clearfix">
                 <div class="title">
-                    <form id="invoiceForm" name="invoiceForm" enctype="multipart/form-data">
+                    <form id="invoiceForm" name="invoiceForm"  enctype="multipart/form-data">
                     @csrf
                     <input type="text" class="form-control input-label" name="header" value="INVOICE" />
                     <div class="subtitle">
@@ -18,8 +18,10 @@
                 </div>
                 
                 <div class="col">
-                    <div class="col-sm-7">
-                            <input type="file" id="input-file-now" name="logo" class="dropify"  data-height="110" data-default-file="url_of_your_file">
+                    <div class="col-sm-7" >
+                        
+                            <input type="file" id="input-file-now" name="file" class="dropzone" >
+                            
                     </div>
                     <div class="contact from">
                         <div class="field">
@@ -99,11 +101,11 @@
                         <div class="main-row">
                             <div class="delete"><button type="button"  class="btn btn-link deleteItem"><strong>X</strong></button></div>
                             <div class="amount value">
-                                <span>&#8377;</span><span class="currency-symbol total-items"></span>    
+                                <span>$</span><span class="currency-symbol total-items"></span>    
                             </div>
                             <div class="unit_cost">
                                 <div class="input-group">
-                                    <span class="input-group-addon currency-sign">&#8377;</span>
+                                    <span class="input-group-addon currency-sign">$</span>
                                     <input class="item-calc form-control item-amount" type="number" step="any" autocomplete="off" name="items[0][unit_cost]" value="0" />
                                 </div>
                             </div>
@@ -145,7 +147,7 @@
                 <div class="col-sm-6">
                     <div class="input-group addon-input">
                         <input class="input-label form-control " type="text" name="subtotal_title" value="Subtotal" />
-                        <div class="input-group-addon value"><span>&#8377;</span><span class="currency-symbol" id="subtotal"></span></div>
+                        <div class="input-group-addon value"><span>$</span><span class="currency-symbol" id="subtotal"></span></div>
                     </div>
                     <div id="discount-div"></div>
                     <div id="tax-div"></div>
@@ -158,20 +160,20 @@
                     <div>
                         <div class="input-group addon-input">
                             <input class="input-label form-control" type="text" name="total_title" value="Total" />
-                            <div class="input-group-addon value"><span class="currency-symbol">&#8377;</span><span id="total">0</span></div>
+                            <div class="input-group-addon value"><span class="currency-symbol">$</span><span id="total">0</span></div>
                         </div>
                         <div class="input-group addon-input">
                             <input class="input-label form-control" type="text" name="amount_paid_title" value="Amount Paid" />
                             <div class="input-group-addon">
                                 <div class="input-group">
-                                    <span class="input-group-addon currency-sign">&#8377;</span>
+                                    <span class="input-group-addon currency-sign">$</span>
                                     <input type="text" class="form-control" name="amount_paid" id="amountPaid" value="0" />
                                 </div>
                             </div>
                         </div>
                         <div class="input-group addon-input">
                             <input class="input-label form-control" type="text" name="total_title" value="Balance Due" />
-                            <div class="input-group-addon value"><span class="currency-symbol">&#8377;</span><span id="balanceDue">0</span></div>
+                            <div class="input-group-addon value"><span class="currency-symbol">$</span><span id="balanceDue">0</span></div>
                         </div>
                     </div>
                 </div>
