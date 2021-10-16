@@ -61,10 +61,12 @@ if (($invoice->discounts ?? '') || ($invoice->tax ?? '') || ($invoice->shipping 
     table tr td {
         width: 25%;
         padding: 5px;
+        word-wrap: break-word;
     }
     
     table tr td:first-child {
         width:  50%;
+        
     }
     
     td.w-50 {
@@ -75,15 +77,15 @@ if (($invoice->discounts ?? '') || ($invoice->tax ?? '') || ($invoice->shipping 
         display:none;
     }
     
+    
 </style>
 </head>
 <body>
-    
+
     <table>
         <tr>
-            <td> <img src="{{asset('assets/images/img_car.jpg')}}" height="130px" width="200px" alt=""> </td>    
-            <td></td>
-            <td class="text-right" >
+            <td> <img src="{{$invoice->imgPath??''}}" height="130px" width="200px" alt=""> </td>    
+            <td colspan="2" class="text-right" >
                 <span class="font-size-50">INVOICE</span><br/>
                 <span>{{$invoice->number}}</span>
             </td>

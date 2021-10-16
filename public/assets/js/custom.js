@@ -7,12 +7,8 @@ var shippingInput;
 var amountPaid
 
 $(document).ready(function(){
-    
-    
-    
     $('#line-item').on('click',function(){
         var index = $('.items-table .item-row').length;
-        
         $('.items-table').append(`<div class="item-row">
             <div class="main-row">
                 <div class="delete"><button type="button"  class="btn btn-link deleteItem"><strong>X</strong></button></div>
@@ -33,7 +29,6 @@ $(document).ready(function(){
                 </div>
             </div>
         </div>`);
-        
 });
 
     $('body').on('click','.deleteItem',function(){
@@ -49,7 +44,6 @@ $(document).ready(function(){
             <button type="button" id="discountClose" class="btn btn-link"><strong>X</strong></button>    
             </div>
         </div>`);
- 
         $('#discount').hide();
     });
  
@@ -105,7 +99,6 @@ $(document).ready(function(){
         });
      
     $( 'body' ).on( 'keyup' , '#shippingInput' , function() {
- 
         var shippingInputBox = $(this).val();
             shippingInput = parseInt(shippingInputBox);
             calculateInvoice();
@@ -158,7 +151,6 @@ $(document).ready(function(){
         itemAmountSpan.html(total);
             
             calculateInvoice();
-    
     });
 
     $('body').on('keyup','.item-amount',function(){
@@ -169,7 +161,6 @@ $(document).ready(function(){
         itemAmountSpan.html(total);
         
         calculateInvoice();
-        
     });
     
     $('body').on( 'keyup' , '#amountPaid' , function(){
@@ -180,40 +171,29 @@ $(document).ready(function(){
     });
     
     $('#downloadInvoice').click(function(){
-        //data = $('#invoiceForm').serialize();
-        let myForm = document.getElementById('invoiceForm');
-        let formData = new FormData(myForm);
-        
-        
+        var _token = $('meta[name="csrf-token"]').attr('content');
+        console.log(_token);
+        data = $('#invoiceForm').serialize();
         $.ajax({
             type : 'POST',
             url : '/form',
-            data : formData,
-            enctype: 'multipart/form-data',
-            processData: false,
-            contentType: false
+            data : data
         });
     });
-    
-    // $('#input-file-now').change(function(){
-    //     let myForm = document.getElementById('invoiceForm');
-    //     let formData = new FormData(myForm);
-    // 
-    //     $.ajax({
-    //         type : 'POST',
-    //         url : '/img',
-    //         data : formData,
-    //         enctype: 'multipart/form-data',
-    //         processData: false,
-    //         contentType: false
-    //     });
-    //});
-    
-    $("#input-file-now").dropzone({
-         url: "/img" 
-     });
+    var _token = $('meta[name="csrf-token"]').attr('content');
 
-    
+    Dropzone.autoDiscover = false;
+    new Dropzone ("#input-file-now", {
+        url: "/img", 
+        dataType: 'json',
+        headers: {
+           'x-csrf-token': _token,
+       },
+        success:function(response) {
+            var imgPath = response.xhr.response;
+            $('#imgPath').val(imgPath);
+        }
+    });
     
 });
 function calculateInvoice() {
@@ -253,9 +233,6 @@ function calculateInvoice() {
             balanceDue = total - amountPaid;
             document.getElementById('balanceDue').innerHTML = balanceDue;
         }
-        
-        
-        
-            
+
 }
 

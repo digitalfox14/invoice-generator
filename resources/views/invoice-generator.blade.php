@@ -1,12 +1,10 @@
-@extends ('layouts.footer')
 @extends ('layouts.app')
-@extends ('layouts.navbar')
 @section ('content')
 <div class="papers" style="margin-top:20;">
+    <form id="invoiceForm" name="invoiceForm">
         <div class="invoice">
             <div class="two-col clearfix">
                 <div class="title">
-                    <form id="invoiceForm" name="invoiceForm"  enctype="multipart/form-data">
                     @csrf
                     <input type="text" class="form-control input-label" name="header" value="INVOICE" />
                     <div class="subtitle">
@@ -16,12 +14,10 @@
                         </div>
                     </div>
                 </div>
-                
                 <div class="col">
                     <div class="col-sm-7" >
-                        
-                            <input type="file" id="input-file-now" name="file" class="dropzone" >
-                            
+                        <div id="input-file-now" class="dropzone" ></div>
+                        <input type="text" hidden name="imgPath" id="imgPath" value="">
                     </div>
                     <div class="contact from">
                         <div class="field">
@@ -32,7 +28,6 @@
                         </div>
                     </div>
                     <div class="contact to">
-                        
                         <div class="field">
                             <input type="text" class="input-label form-control" name="to_title" value="Bill To" >
                         </div>
@@ -41,7 +36,6 @@
                         </div>
                     </div>
                 </div>
-                
                 <div class="col">
                     <div class="input-group addon-input">
                         <input class="input-label form-control" type="text" name="date_title" value="Date" />
@@ -49,14 +43,12 @@
                             <input id="invoiceDate" class="form-control datepicker" type="text" name="date"  />
                         </div>
                     </div>
-                    
                     <div class="input-group addon-input">
                         <input class="input-label form-control" type="text" name="payment_terms_title" value="Payment Terms" />
                         <div class="input-group-addon">
                             <input id="invoiceDate" class="form-control" type="text" name="payment_terms"  />
                         </div>
                     </div>
-                    
                     <div class="input-group addon-input">
                         <input class="input-label form-control" type="text" name="due_date_title" value="Due Date" />
                         <div class="input-group-addon">
@@ -69,10 +61,8 @@
                             <input id="invoiceDate" class="form-control " type="text" name="po_number"  />
                         </div>
                     </div>
-                    
                 </div>
             </div>
-            
             <div class="items-holder">
                 <div class="items-table-header">
                     <div class="amount">
@@ -142,7 +132,7 @@
                                 <textarea class="terms form-control" placeholder="Terms and conditions - late fees, payment methods, delivery schedule" name="terms" style="resize: none;"></textarea>
                             </div>
                         </div>
-                    </div>
+                    </div>  
                 </div>
                 <div class="col-sm-6">
                     <div class="input-group addon-input">

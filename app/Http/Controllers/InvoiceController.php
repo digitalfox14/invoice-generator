@@ -22,7 +22,6 @@ class InvoiceController extends Controller
         
         $pdf = PDF::loadView('invoice.download',['invoice' => $invoice]);
         return $pdf->stream('invoice.pdf');
-        return view('invoice.download',['invoice' => $invoice]);
     }
 
     /**
@@ -43,8 +42,6 @@ class InvoiceController extends Controller
      */
     public function store(Request $request)
     {
-        
-        echo "<pre>"; print_r($request->all()); die;
         $encodeInvoive = json_encode($request->all());
         $authId = Auth::id();
         $ipAddress = $request->ip();
@@ -101,13 +98,9 @@ class InvoiceController extends Controller
     }
     public function img(Request $request)
     {
-        echo "<pre>"; print_r($request->all()); die;
         $path = Storage::putFile('img', $request->file('file'));
-        echo "<pre>"; print_r($path);
         $path_url = url('storage/'.$path);
-        echo asset('storage/'.$path);
-        echo "<pre>"; print_r($path_url); die;
-        
-        
+          $imgPath = $path_url;
+        return response($imgPath);
     }
 }
