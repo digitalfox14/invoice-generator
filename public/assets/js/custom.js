@@ -97,12 +97,12 @@ $(document).ready(function(){
             </div>`);
             $('#shipping').hide();
         });
-     
+        
     $( 'body' ).on( 'keyup' , '#shippingInput' , function() {
-        var shippingInputBox = $(this).val();
+            var shippingInputBox = $(this).val();
             shippingInput = parseInt(shippingInputBox);
             calculateInvoice();
-    });
+        });
     
     $( 'body' ).on( 'click' , '#shippingClose' , function(){
         shippingInput = 0;
@@ -170,16 +170,6 @@ $(document).ready(function(){
             document.getElementById('balanceDue').innerHTML = balanceDue;
     });
     
-    $('#downloadInvoice').click(function(){
-        var _token = $('meta[name="csrf-token"]').attr('content');
-        console.log(_token);
-        data = $('#invoiceForm').serialize();
-        $.ajax({
-            type : 'POST',
-            url : '/form',
-            data : data
-        });
-    });
     var _token = $('meta[name="csrf-token"]').attr('content');
 
     Dropzone.autoDiscover = false;
@@ -194,6 +184,24 @@ $(document).ready(function(){
             $('#imgPath').val(imgPath);
         }
     });
+    
+    $('#downloadInvoice').click(function(){
+        var _token = $('meta[name="csrf-token"]').attr('content');
+        
+        
+            $('#invoiceForm').submit();
+        
+        // data = $('#invoiceForm').serialize();
+        // $.ajax({
+        //     type : 'POST',
+        //     url : '/form',
+        //     data : data
+        // });
+        
+    });
+    
+    
+    
     
 });
 function calculateInvoice() {

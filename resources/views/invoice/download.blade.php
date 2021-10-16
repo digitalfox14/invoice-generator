@@ -80,7 +80,7 @@ if (($invoice->discounts ?? '') || ($invoice->tax ?? '') || ($invoice->shipping 
     
 </style>
 </head>
-<body>
+<body target="_blank">
 
     <table>
         <tr>

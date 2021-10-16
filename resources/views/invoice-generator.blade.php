@@ -1,7 +1,7 @@
 @extends ('layouts.app')
 @section ('content')
 <div class="papers" style="margin-top:20;">
-    <form id="invoiceForm" name="invoiceForm">
+    <form id="invoiceForm" name="invoiceForm" action="/form" method="post">
         <div class="invoice">
             <div class="two-col clearfix">
                 <div class="title">

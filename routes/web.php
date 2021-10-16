@@ -22,7 +22,7 @@ Auth::routes();
 
 //Route::get('/form', [App\Http\Controllers\HomeController::class, 'data'])->name('form');
 Route::post('/form',[InvoiceController::class, 'store'])->name('invoice.store');
-Route::get('/download/{id}/pdf',[InvoiceController::class, 'index'])->name('invoice.index');
-Route::get('/invoice/1/download',[InvoiceController::class, 'show'])->name('invoice.show');
+Route::get('/download/pdf',[InvoiceController::class, 'index'])->name('invoice.index');
+
 
 Route::post('/img',[InvoiceController::class, 'img'])->name('invoice.img');

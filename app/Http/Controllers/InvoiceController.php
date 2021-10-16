@@ -15,13 +15,9 @@ class InvoiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index()
     {
-        $invoice = Invoice::find($id);
-        $invoice= json_decode($invoice->invoice);
-        
-        $pdf = PDF::loadView('invoice.download',['invoice' => $invoice]);
-        return $pdf->stream('invoice.pdf');
+        //
     }
 
     /**
@@ -49,7 +45,12 @@ class InvoiceController extends Controller
         $invoice->user_id = $authId;
         $invoice->ip_address = $ipAddress;
         $invoice->invoice = $encodeInvoive;
-        $invoice->save();    
+        $invoice->save();
+        $invoice= json_decode($invoice->invoice);
+        $pdf = PDF::loadView('invoice.download',['invoice' => $invoice]);
+        return $pdf->download('invoice.pdf');
+        
+        
     }
 
     /**
